@@ -54,7 +54,7 @@ gulp.task 'test', ->
 gulp.task 'coverage', (done) ->
   istanbul = require('gulp-istanbul')
   karma    = require('gulp-karma')
-  gulp.src(['src/*.js', 'src/**/*.js'])
+  gulp.src(['dist/action-tracker.js'])
     .pipe istanbul({includeUntested: true})
     .on 'finish', () ->
       gulp.src(test_files)

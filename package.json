@@ -6,6 +6,7 @@
   "scripts": {
     "bump": "mversion $1 -m '%s'",
     "build": "gulp build",
+    "coverage": "gulp coverage && cat ./coverage/lcov.info | codeclimate-test-reporter && rm -rf ./coverage",
     "start": "gulp",
     "test": "gulp test"
   },
@@ -20,6 +21,7 @@
     "conventional-changelog": "^0.4.3",
     "expose-loader": "^0.7.0",
     "gulp": "^3.9.0",
+    "gulp-istanbul": "^0.10.0",
     "gulp-karma": "0.0.4",
     "gulp-rename": "^1.2.2",
     "gulp-uglify": "^1.4.1",
