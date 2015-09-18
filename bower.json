@@ -1,0 +1,23 @@
+{
+  "name": "action-tracker",
+  "version": "0.1.0",
+  "homepage": "https://github.com/rymizuki/action-tracker.js",
+  "description": "The easy-to-use library for Google Analytics's tracking.",
+  "main": "dist/action-tracker.min.js",
+  "keywords": [
+    "google",
+    "analytics",
+    "tracker"
+  ],
+  "authors": [
+    "mizuki_r <ry.mizuki@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
