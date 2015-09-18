@@ -14,10 +14,12 @@ The easy-to-use library for Google Analytics's tracking.
 
 [bower](http://bower.io/):
 ```
+bower install --save action-tracker
 ```
 
 [npm](https://www.npmjs.com/):
 ```
+npm install --save action-tracker
 ```
 
 ## Examples
