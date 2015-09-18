@@ -1,3 +1,18 @@
+<a name="0.1.1"></a>
+## 0.1.1 (2015-09-18)
+
+
+### chore
+
+* chore(bower): add bower config ([9a5869b](https://github.com/rymizuki/action-tracker.js/commit/9a5869b))
+* chore(package.json): update package.json ([52ff8f5](https://github.com/rymizuki/action-tracker.js/commit/52ff8f5))
+
+### docs
+
+* docs(README): update instalation ([95157b7](https://github.com/rymizuki/action-tracker.js/commit/95157b7))
+
+
+
 <a name="0.1.0"></a>
 # 0.1.0 (2015-09-18)
 
