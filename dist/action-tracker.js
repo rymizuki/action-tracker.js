@@ -67,10 +67,29 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _tracker2 = _interopRequireDefault(_tracker);
 
 	function tracker(options) {
-	  new _tracker2['default'](options);
+	  return new _tracker2['default'](options);
 	}
 
 	tracker.Tracker = _tracker2['default'];
+
+	var __cached = null;
+	function __getTracker() {
+	  return __cached || (__cached = tracker());
+	}
+
+	var methods = ['set', 'send', 'pageview', 'emit'];
+
+	var _loop = function (index) {
+	  var methodName = methods[index];
+	  tracker[methodName] = function () {
+	    var t = __getTracker();
+	    return t[methodName].apply(t, arguments);
+	  };
+	};
+
+	for (var index = 0; index < methods.length; index++) {
+	  _loop(index);
+	}
 
 	exports['default'] = tracker;
 	module.exports = exports['default'];
