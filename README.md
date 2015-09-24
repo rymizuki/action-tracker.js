@@ -2,8 +2,8 @@
 
 The easy-to-use library for Google Analytics's tracking.
 
-[![npm version](https://badge.fury.io/js/action-tracker.js.svg)](http://badge.fury.io/js/action-tracker.js)
-[![Bower version](https://badge.fury.io/bo/action-tracker.js.svg)](http://badge.fury.io/bo/action-tracker.js)
+[![npm version](https://badge.fury.io/js/action-tracker.svg)](http://badge.fury.io/js/action-tracker.js)
+[![Bower version](https://badge.fury.io/bo/action-tracker.svg)](http://badge.fury.io/bo/action-tracker.js)
 [![Build Status](https://travis-ci.org/rymizuki/action-tracker.js.svg?branch=master)](https://travis-ci.org/rymizuki/action-tracker.js)
 [![Codacy Badge](https://www.codacy.com/project/badge/5d397cce7c904909a1e26d69bd7f6a99)](https://www.codacy.com/app/ry-mizuki/action-tracker.js)
 [![Code Climate](https://codeclimate.com/github/rymizuki/action-tracker.js/badges/gpa.svg)](https://codeclimate.com/github/rymizuki/action-tracker.js)
