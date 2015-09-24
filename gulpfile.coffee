@@ -16,6 +16,8 @@ gulp.task 'build', ->
       entry: 'action-tracker'
       output:
         filename: 'action-tracker.js'
+        libraryTarget: 'umd'
+        library: 'ActionTracker'
       resolve:
         extensions: [
           '',

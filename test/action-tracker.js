@@ -1,17 +1,17 @@
 describe('expose', function () {
   describe('window', function () {
-    it('should be has property `tracker`', function () {
-      assert.ok(tracker != null)
-      assert.ok(typeof tracker === 'function')
+    it('should be has property `ActionTracker`', function () {
+      assert.ok(ActionTracker != null)
+      assert.ok(typeof  ActionTracker === 'function')
     })
   })
 })
 
-describe('tracker', function () {
+describe('ActionTracker', function () {
   describe('.Tracker', function () {
     it('should be has property `Tracker`', function () {
-      assert.ok(tracker.Tracker != null)
-      assert.ok('function' == typeof tracker.Tracker)
+      assert.ok(ActionTracker.Tracker != null)
+      assert.ok('function' == typeof ActionTracker.Tracker)
     })
   })
 })
@@ -26,9 +26,9 @@ describe('Tracker', function () {
   afterEach(function () {
   })
   describe('.set()', function () {
-    describe('default tracker', function () {
+    describe('default ActionTracker', function () {
       it('should be call `ga("set", name, value)`', function () {
-        var visitor = new tracker.Tracker()
+        var visitor = new ActionTracker.Tracker()
         visitor.set('path', '/')
         assert.ok(window.ga.calledOnce)
         assert.ok(window.ga.calledWith('set', 'path', '/'))
@@ -36,7 +36,7 @@ describe('Tracker', function () {
     })
     describe('named tracker', function () {
       it('should be call `ga("myname.set", name, value)`', function () {
-        var visitor = new tracker.Tracker({name: 'myname'})
+        var visitor = new ActionTracker.Tracker({name: 'myname'})
         visitor.set('path', '/')
         assert.ok(window.ga.calledOnce)
         assert.ok(window.ga.calledWith('myname.set', 'path', '/'))
@@ -45,23 +45,23 @@ describe('Tracker', function () {
   })
   describe('.send', function () {
     it('should be return promise instance', function () {
-      var visitor = new tracker.Tracker()
+      var visitor = new ActionTracker.Tracker()
       var result = visitor.send('pageview', {title: 'my title'})
       assert.ok(result.then != null && 'function' == typeof result.then)
     })
-    describe('default tracker', function () {
+    describe('default ActionTracker', function () {
       it('should be call `ga("send", name, value)`', function () {
         var options = {title: 'my title'},
-            visitor = new tracker.Tracker()
+            visitor = new ActionTracker.Tracker()
         visitor.send('pageview', options)
         assert.ok(window.ga.calledOnce);
         assert.ok(window.ga.calledWith('send', 'pageview', options))
       })
     })
-    describe('named tracker', function () {
+    describe('named ActionTracker', function () {
       it('should be call `ga("myname.send", name, value)`', function () {
         var options = {title: 'my title'},
-            visitor = new tracker.Tracker({name: 'myname'})
+            visitor = new ActionTracker.Tracker({name: 'myname'})
         visitor.send('pageview', options)
         assert.ok(window.ga.calledOnce);
         assert.ok(window.ga.calledWith('myname.send', 'pageview', options))
@@ -70,13 +70,13 @@ describe('Tracker', function () {
   })
   describe('.pageview', function () {
     it('should be return promise instance', function () {
-      var visitor = new tracker.Tracker()
+      var visitor = new ActionTracker.Tracker()
       var result = visitor.pageview()
       assert.ok(result.then != null && 'function' == typeof result.then)
     })
     describe('non arguments', function () {
       it('should be call `ga("send", "pageview")`', function () {
-        var visitor = new tracker.Tracker()
+        var visitor = new ActionTracker.Tracker()
         visitor.pageview()
         assert.ok(window.ga.calledOnce)
         assert.equal(window.ga.args[0][0], 'send')
@@ -85,7 +85,7 @@ describe('Tracker', function () {
     })
     describe('override path', function () {
       it('should be call `ga("set", "page", path)` and ga("send", "pageview")`', function () {
-        var visitor = new tracker.Tracker()
+        var visitor = new ActionTracker.Tracker()
         visitor.pageview('/')
         assert.ok(window.ga.calledTwice)
         assert.equal(window.ga.args[0][0], 'set')
@@ -98,13 +98,13 @@ describe('Tracker', function () {
   })
   describe('.emit', function () {
     it('should be return promise instance', function () {
-      var visitor = new tracker.Tracker()
+      var visitor = new ActionTracker.Tracker()
       var result = visitor.emit('category', 'action')
       assert.ok(result.then != null && 'function' == typeof result.then)
     })
     describe('.emit(category, action)', function () {
       it('should be call `ga("send", "event", options)`', function () {
-        var visitor = new tracker.Tracker()
+        var visitor = new ActionTracker.Tracker()
         visitor.emit('category', 'action')
         assert.ok(window.ga.calledOnce)
         assert.equal(window.ga.args[0][0], 'send')
@@ -116,7 +116,7 @@ describe('Tracker', function () {
     })
     describe('.emit(category, action, label)', function () {
       it('should be call `ga("send", "event", options)`', function () {
-        var visitor = new tracker.Tracker()
+        var visitor = new ActionTracker.Tracker()
         visitor.emit('category', 'action', 'label')
         assert.ok(window.ga.calledOnce)
         assert.equal(window.ga.args[0][0], 'send')
@@ -128,7 +128,7 @@ describe('Tracker', function () {
     })
     describe('.emit(category, action, label, value)', function () {
       it('should be call `ga("send", "event", options)`', function () {
-        var visitor = new tracker.Tracker()
+        var visitor = new ActionTracker.Tracker()
         visitor.emit('category', 'action', 'label', 1)
         assert.ok(window.ga.calledOnce)
         assert.equal(window.ga.args[0][0], 'send')

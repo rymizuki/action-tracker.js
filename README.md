@@ -30,7 +30,7 @@ npm install --save action-tracker
   ga('create', {YOUR PROPERTY ID})
 </script>
 <script>
-  var tracker = actionTracker()
+  var tracker = ActionTracker()
 
   $('a[data-tracker]').on('click', function () {
     tracker.emit('anchor', 'click', $(this).text())
