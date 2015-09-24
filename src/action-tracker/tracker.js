@@ -1,4 +1,11 @@
-class Tracker {
+function __plantResolver (resolve, fn) {
+  return function (resolve) {
+    fn && fn.apply(this, arguments);
+    resolve();
+  };
+}
+
+export default class Tracker {
   constructor (options={}) {
     if (null != options.name) {
       this.name = options.name;
@@ -46,17 +53,4 @@ class Tracker {
   }
 }
 
-function __plantResolver (resolve, fn) {
-  return function (resolve) {
-    fn && fn.apply(this, arguments);
-    resolve();
-  };
-}
 
-function tracker (options) {
-  new Tracker(options);
-}
-
-tracker.Tracker = Tracker
-
-export default tracker;
