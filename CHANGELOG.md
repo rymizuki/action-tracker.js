@@ -1,3 +1,25 @@
+<a name="1.0.0-0"></a>
+# 1.0.0-0 (2015-09-24)
+
+
+### chore
+
+* chore(gulp): add output library ([4ebb031](https://github.com/rymizuki/action-tracker.js/commit/4ebb031))
+
+### feat
+
+* feat(action-tracker): add shorthand methods. ([57402e3](https://github.com/rymizuki/action-tracker.js/commit/57402e3))
+
+### fix
+
+* fix(README): fixn typo in README's badge URL ([5c2817f](https://github.com/rymizuki/action-tracker.js/commit/5c2817f))
+
+### refactor
+
+* refactor(action-tracker): separation of the tracker class ([ccfa840](https://github.com/rymizuki/action-tracker.js/commit/ccfa840))
+
+
+
 <a name="0.1.1"></a>
 ## 0.1.1 (2015-09-18)
 
