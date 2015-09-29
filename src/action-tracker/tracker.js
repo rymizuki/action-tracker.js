@@ -20,7 +20,7 @@ export default class Tracker {
   }
   __create (id, options={}) {
     return new Promise(function (resolve) {
-      options.hitCallback = __plantResolver(options.hitCallback);
+      options.hitCallback = __plantResolver(resolve, options.hitCallback);
       ga(this.__named('create'), id, (options || 'auto'));
     });
   }

@@ -156,7 +156,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 
 	      return new _Promise(function (resolve) {
-	        options.hitCallback = __plantResolver(options.hitCallback);
+	        options.hitCallback = __plantResolver(resolve, options.hitCallback);
 	        ga(this.__named('create'), id, options || 'auto');
 	      });
 	    }
@@ -509,7 +509,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 19 */
 /***/ function(module, exports) {
 
-	var core = module.exports = {};
+	var core = module.exports = {version: '1.2.0'};
 	if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
 
 /***/ },
@@ -839,10 +839,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	    chain.length = 0;
 	    record.n = false;
 	    if(isReject)setTimeout(function(){
-	      if(isUnhandled(record.p)){
+	      var promise = record.p
+	        , handler, console;
+	      if(isUnhandled(promise)){
 	        if(isNode){
-	          process.emit('unhandledRejection', value, record.p);
-	        } else if(global.console && console.error){
+	          process.emit('unhandledRejection', value, promise);
+	        } else if(handler = global.onunhandledrejection){
+	          handler({promise: promise, reason: value});
+	        } else if((console = global.console) && console.error){
 	          console.error('Unhandled promise rejection', value);
 	        }
 	      } record.a = undefined;
@@ -927,9 +931,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	        fail: typeof onRejected == 'function'  ? onRejected  : false
 	      };
 	      var promise = react.P = new (S != undefined ? S : P)(function(res, rej){
-	        react.res = aFunction(res);
-	        react.rej = aFunction(rej);
+	        react.res = res;
+	        react.rej = rej;
 	      });
+	      aFunction(react.res);
+	      aFunction(react.rej);
 	      var record = this[RECORD];
 	      record.c.push(react);
 	      if(record.a)record.a.push(react);
@@ -1013,9 +1019,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    case 3: return function(a, b, c){
 	      return fn.call(that, a, b, c);
 	    };
-	  } return function(/* ...args */){
-	      return fn.apply(that, arguments);
-	    };
+	  }
+	  return function(/* ...args */){
+	    return fn.apply(that, arguments);
+	  };
 	};
 
 /***/ },
@@ -1052,9 +1059,8 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 43 */
 /***/ function(module, exports) {
 
-	// http://jsperf.com/core-js-isobject
 	module.exports = function(it){
-	  return it !== null && (typeof it == 'object' || typeof it == 'function');
+	  return typeof it === 'object' ? it !== null : typeof it === 'function';
 	};
 
 /***/ },
@@ -1164,20 +1170,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	  if(!isObject(proto) && proto !== null)throw TypeError(proto + ": can't set as prototype!");
 	};
 	module.exports = {
-	  set: Object.setPrototypeOf || ('__proto__' in {} // eslint-disable-line
-	    ? function(buggy, set){
-	        try {
-	          set = __webpack_require__(40)(Function.call, getDesc(Object.prototype, '__proto__').set, 2);
-	          set({}, []);
-	        } catch(e){ buggy = true; }
-	        return function setPrototypeOf(O, proto){
-	          check(O, proto);
-	          if(buggy)O.__proto__ = proto;
-	          else set(O, proto);
-	          return O;
-	        };
-	      }()
-	    : undefined),
+	  set: Object.setPrototypeOf || ('__proto__' in {} ? // eslint-disable-line no-proto
+	    function(test, buggy, set){
+	      try {
+	        set = __webpack_require__(40)(Function.call, getDesc(Object.prototype, '__proto__').set, 2);
+	        set(test, []);
+	        buggy = !(test instanceof Array);
+	      } catch(e){ buggy = true; }
+	      return function setPrototypeOf(O, proto){
+	        check(O, proto);
+	        if(buggy)O.__proto__ = proto;
+	        else set(O, proto);
+	        return O;
+	      };
+	    }({}, false) : undefined),
 	  check: check
 	};
 
