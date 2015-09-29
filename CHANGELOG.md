@@ -1,3 +1,13 @@
+<a name="1.0.1"></a>
+## 1.0.1 (2015-09-29)
+
+
+### fix
+
+* fix(action-tracker): don't call promise.resolve in tracker.send ([5f1abb6](https://github.com/rymizuki/action-tracker.js/commit/5f1abb6))
+
+
+
 <a name="1.0.0"></a>
 # 1.0.0 (2015-09-24)
 
