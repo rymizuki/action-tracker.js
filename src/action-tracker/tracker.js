@@ -1,5 +1,5 @@
 function __plantResolver (resolve, fn) {
-  return function (resolve) {
+  return function () {
     fn && fn.apply(this, arguments);
     resolve();
   };
