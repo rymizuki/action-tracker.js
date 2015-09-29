@@ -1,3 +1,12 @@
+<a name="1.0.2"></a>
+## 1.0.2 (2015-09-29)
+
+
+* fix(action-tracker/send): fix tracker.send's resolve ([108f0ae](https://github.com/rymizuki/action-tracker.js/commit/108f0ae))
+* Merge pull request #2 from rymizuki/fix_resolve_send ([d768f35](https://github.com/rymizuki/action-tracker.js/commit/d768f35))
+
+
+
 <a name="1.0.1"></a>
 ## 1.0.1 (2015-09-29)
 
