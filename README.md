@@ -81,7 +81,7 @@ Send event.
 
 Send the exception.
 
-- error_message [required] ... description of the exception.
+- error_message [required] ... description of the exception or `Error` object. serialize to json format string.
 - options.fatal [optional] ... GA's `exFatal` flag. By default, set a `false`.
 
 ## LICENSE

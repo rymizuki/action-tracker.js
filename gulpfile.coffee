@@ -4,36 +4,18 @@ test_files = [
   'node_modules/sinon-browser-only/sinon.js'
   'node_modules/power-assert/build/power-assert.js'
   'dist/action-tracker.min.js'
-  'test/**/*.js'
+  'test/**/*_spec.js'
 ]
+
+webpack_config = require('./webpack.conf.coffee')
 
 gulp.task 'build', ->
   webpack = require('webpack-stream')
   uglify  = require('gulp-uglify')
   rename  = require('gulp-rename')
+  webpack_config.entry = 'action-tracker'
   gulp.src('src')
-    .pipe webpack(
-      entry: 'action-tracker'
-      output:
-        filename: 'action-tracker.js'
-        libraryTarget: 'umd'
-        library: 'ActionTracker'
-      resolve:
-        extensions: [
-          '',
-          '.js'
-        ]
-        modulesDirectories: [
-          './src/',
-          './node_modules/'
-        ]
-      module:
-        loaders: [
-          { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader?experimental&optional=runtime' }
-        ]
-      externals: [
-      ]
-    )
+    .pipe webpack(webpack_config)
     .pipe gulp.dest('dist/')
     .pipe uglify()
     .pipe rename({suffix: '.min'})

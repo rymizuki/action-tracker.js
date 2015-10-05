@@ -20,6 +20,7 @@ module.exports = (config) ->
     # preprocess matching files before serving them to the browser
     # available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+      'test/**/*_spec.js': ['webpack']
     }
 
     # test results reporter to use
@@ -54,3 +55,5 @@ module.exports = (config) ->
     # Continuous Integration mode
     # if true, Karma captures browsers, runs the tests and exits
     singleRun: false
+
+    webpack: require('./webpack.conf.coffee')

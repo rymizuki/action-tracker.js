@@ -120,9 +120,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _Promise = __webpack_require__(8)['default'];
 
+	var _interopRequireDefault = __webpack_require__(1)['default'];
+
 	Object.defineProperty(exports, '__esModule', {
 	  value: true
 	});
+
+	var _error = __webpack_require__(61);
+
+	var _error2 = _interopRequireDefault(_error);
+
 	function __plantResolver(resolve, fn) {
 	  return function () {
 	    fn && fn.apply(this, arguments);
@@ -142,6 +149,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (null != options.id) {
 	      this.id = options.id;
 	      this.__create(options.id, options);
+	    }
+	    if (null != options.exception && 'function' == typeof options.exception) {
+	      this.__createException = options.exception.bind(this);
 	    }
 	  }
 
@@ -178,6 +188,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	      });
 	    }
 	  }, {
+	    key: '__createException',
+	    value: function __createException(err, options) {
+	      return new _error2['default'](err, options);
+	    }
+	  }, {
 	    key: 'set',
 	    value: function set() {
 	      return this.__set.apply(this, arguments);
@@ -212,11 +227,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  }, {
 	    key: 'exception',
-	    value: function exception(message) {
+	    value: function exception(err) {
 	      var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 
+	      var exception = this.__createException(err, options);
 	      return this.send('exception', {
-	        exDescription: message,
+	        exDescription: exception.stringify(),
 	        exFatal: options.fatal || false
 	      });
 	    }
@@ -1427,6 +1443,141 @@ return /******/ (function(modules) { // webpackBootstrap
 	    exec(arr);
 	  } catch(e){ /* empty */ }
 	  return safe;
+	};
+
+/***/ },
+/* 61 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = __webpack_require__(3)['default'];
+
+	var _classCallCheck = __webpack_require__(7)['default'];
+
+	var _Object$assign = __webpack_require__(62)['default'];
+
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+
+	var CustomError = (function () {
+	  function CustomError(err) {
+	    var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+
+	    _classCallCheck(this, CustomError);
+
+	    if ('object' == typeof err) {
+	      this.name = err.name;
+	      this.message = err.message;
+	      this.stack = err.stack || '';
+	    } else {
+	      this.name = err;
+	      this.message = err;
+	      this.stack = '';
+	    }
+	    this.ua = navigator.userAgent;
+	    this.options = options;
+	  }
+
+	  _createClass(CustomError, [{
+	    key: 'stringify',
+	    value: function stringify() {
+	      return JSON.stringify(this.jsonify());
+	    }
+	  }, {
+	    key: 'jsonify',
+	    value: function jsonify() {
+	      return _Object$assign(this.options.data || {}, {
+	        name: this.name,
+	        message: this.message,
+	        stack: this.stack,
+	        ua: this.ua
+	      });
+	    }
+	  }]);
+
+	  return CustomError;
+	})();
+
+	exports['default'] = CustomError;
+	module.exports = exports['default'];
+
+/***/ },
+/* 62 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(63), __esModule: true };
+
+/***/ },
+/* 63 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(64);
+	module.exports = __webpack_require__(19).Object.assign;
+
+/***/ },
+/* 64 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 19.1.3.1 Object.assign(target, source)
+	var $def = __webpack_require__(17);
+
+	$def($def.S + $def.F, 'Object', {assign: __webpack_require__(65)});
+
+/***/ },
+/* 65 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 19.1.2.1 Object.assign(target, source, ...)
+	var toObject = __webpack_require__(66)
+	  , IObject  = __webpack_require__(37)
+	  , enumKeys = __webpack_require__(67);
+
+	module.exports = __webpack_require__(24)(function(){
+	  return Symbol() in Object.assign({}); // Object.assign available and Symbol is native
+	}) ? function assign(target, source){   // eslint-disable-line no-unused-vars
+	  var T = toObject(target)
+	    , l = arguments.length
+	    , i = 1;
+	  while(l > i){
+	    var S      = IObject(arguments[i++])
+	      , keys   = enumKeys(S)
+	      , length = keys.length
+	      , j      = 0
+	      , key;
+	    while(length > j)T[key = keys[j++]] = S[key];
+	  }
+	  return T;
+	} : Object.assign;
+
+/***/ },
+/* 66 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 7.1.13 ToObject(argument)
+	var defined = __webpack_require__(14);
+	module.exports = function(it){
+	  return Object(defined(it));
+	};
+
+/***/ },
+/* 67 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// all enumerable object keys, includes symbols
+	var $ = __webpack_require__(6);
+	module.exports = function(it){
+	  var keys       = $.getKeys(it)
+	    , getSymbols = $.getSymbols;
+	  if(getSymbols){
+	    var symbols = getSymbols(it)
+	      , isEnum  = $.isEnum
+	      , i       = 0
+	      , key;
+	    while(symbols.length > i)if(isEnum.call(it, key = symbols[i++]))keys.push(key);
+	  }
+	  return keys;
 	};
 
 /***/ }
