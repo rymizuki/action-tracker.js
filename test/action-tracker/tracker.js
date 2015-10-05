@@ -131,4 +131,44 @@ describe('Tracker', function () {
       })
     })
   })
+  describe('.exception', function () {
+    it('should be return promise instance', function () {
+      var visitor = new ActionTracker.Tracker()
+      var result = visitor.exception('type error')
+      assert.ok(result.then != null && 'function' == typeof result.then)
+    })
+    describe('.exception(message)', function () {
+      it('should be ga("exception", {exDescription: message, exFatal: false})', function () {
+        var visitor = new ActionTracker.Tracker()
+        visitor.exception('type error')
+        assert.ok(window.ga.calledOnce)
+        assert.equal(window.ga.args[0][0], 'send')
+        assert.equal(window.ga.args[0][1], 'exception')
+        assert.equal(window.ga.args[0][2].exDescription, 'type error')
+        assert.equal(window.ga.args[0][2].exFatal, false)
+      })
+    })
+    describe('.exception(message, {fatal: false})', function () {
+      it('should be ga("exception", {exDescription: message, exFatal: false})', function () {
+        var visitor = new ActionTracker.Tracker()
+        visitor.exception('type error', {fatal: false})
+        assert.ok(window.ga.calledOnce)
+        assert.equal(window.ga.args[0][0], 'send')
+        assert.equal(window.ga.args[0][1], 'exception')
+        assert.equal(window.ga.args[0][2].exDescription, 'type error')
+        assert.equal(window.ga.args[0][2].exFatal, false)
+      })
+    })
+    describe('.exception(message, {fatal: true})', function () {
+      it('should be ga("exception", {exDescription: message, exFatal: true})', function () {
+        var visitor = new ActionTracker.Tracker()
+        visitor.exception('type error', {fatal: true})
+        assert.ok(window.ga.calledOnce)
+        assert.equal(window.ga.args[0][0], 'send')
+        assert.equal(window.ga.args[0][1], 'exception')
+        assert.equal(window.ga.args[0][2].exDescription, 'type error')
+        assert.equal(window.ga.args[0][2].exFatal, true)
+      })
+    })
+  })
 })

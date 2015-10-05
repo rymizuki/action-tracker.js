@@ -51,6 +51,12 @@ export default class Tracker {
       eventValue
     });
   }
+  exception (message, options={}) {
+    return this.send('exception', {
+      exDescription: message,
+      exFatal: options.fatal || false
+    })
+  }
 }
 
 
