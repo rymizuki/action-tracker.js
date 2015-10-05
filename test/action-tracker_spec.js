@@ -136,12 +136,21 @@ describe('ActionTracker.exception', function () {
       assert.equal(stub.args[0][1].fatal, false)
     })
   })
-  describe('.exception(error, {fatal: true)', function () {
+  describe('.exception(error, {fatal: true})', function () {
     it('should be called tracker.exception(error, {fatal: true})', function () {
       ActionTracker.exception('type error', {fatal: true})
       assert.ok(stub.calledOnce)
       assert.equal(stub.args[0][0], 'type error')
       assert.equal(stub.args[0][1].fatal, true)
+    })
+  })
+  describe('.exception(error, {fatal: true, data: {hoge: fuga}})', function () {
+    it('should be called tracker.exception(error, {fatal: true})', function () {
+      ActionTracker.exception('type error', {fatal: true, data: {hoge: 'fuga'}})
+      assert.ok(stub.calledOnce)
+      assert.equal(stub.args[0][0], 'type error')
+      assert.equal(stub.args[0][1].fatal, true)
+      assert.equal(stub.args[0][1].data.hoge, 'fuga')
     })
   })
 })

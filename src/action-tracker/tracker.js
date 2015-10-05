@@ -1,3 +1,5 @@
+import CustomError from './error';
+
 function __plantResolver (resolve, fn) {
   return function () {
     fn && fn.apply(this, arguments);
@@ -13,6 +15,9 @@ export default class Tracker {
     if (null != options.id) {
       this.id = options.id;
       this.__create(options.id, options)
+    }
+    if (null != options.exception && 'function' == typeof options.exception) {
+      this.__createException = options.exception.bind(this);
     }
   }
   __named (name) {
@@ -33,6 +38,9 @@ export default class Tracker {
       ga(this.__named('send'), name, options);
     });
   }
+  __createException (err, options) {
+    return new CustomError(err, options);
+  }
   set () {
     return this.__set.apply(this, arguments);
   }
@@ -51,12 +59,11 @@ export default class Tracker {
       eventValue
     });
   }
-  exception (message, options={}) {
+  exception (err, options={}) {
+    var exception = this.__createException(err, options);
     return this.send('exception', {
-      exDescription: message,
+      exDescription: exception.stringify(),
       exFatal: options.fatal || false
     })
   }
 }
-
-

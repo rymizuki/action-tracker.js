@@ -1,4 +1,5 @@
 import Tracker from 'action-tracker/tracker'
+import CustomError from 'action-tracker/error'
 
 describe('ActionTracker', function () {
   describe('.Tracker', function () {
@@ -143,7 +144,7 @@ describe('Tracker', function () {
         assert.ok(global.ga.calledOnce)
         assert.equal(global.ga.args[0][0], 'send')
         assert.equal(global.ga.args[0][1], 'exception')
-        assert.equal(global.ga.args[0][2].exDescription, 'type error')
+        assert.equal(global.ga.args[0][2].exDescription, new CustomError('type error').stringify())
         assert.equal(global.ga.args[0][2].exFatal, false)
       })
     })
@@ -154,7 +155,7 @@ describe('Tracker', function () {
         assert.ok(global.ga.calledOnce)
         assert.equal(global.ga.args[0][0], 'send')
         assert.equal(global.ga.args[0][1], 'exception')
-        assert.equal(global.ga.args[0][2].exDescription, 'type error')
+        assert.equal(global.ga.args[0][2].exDescription, new CustomError('type error').stringify())
         assert.equal(global.ga.args[0][2].exFatal, false)
       })
     })
@@ -165,7 +166,19 @@ describe('Tracker', function () {
         assert.ok(global.ga.calledOnce)
         assert.equal(global.ga.args[0][0], 'send')
         assert.equal(global.ga.args[0][1], 'exception')
-        assert.equal(global.ga.args[0][2].exDescription, 'type error')
+        assert.equal(global.ga.args[0][2].exDescription, new CustomError('type error').stringify())
+        assert.equal(global.ga.args[0][2].exFatal, true)
+      })
+    })
+    describe('.exception(message, {fatal: true, data: {hoge: fuga})', function () {
+      it('should be ga("exception", {exDescription: message, exFatal: true})', function () {
+        var visitor = new Tracker()
+        visitor.exception('type error', {fatal: true, data: {hoge: 'fuga'}})
+        assert.ok(global.ga.calledOnce)
+        assert.equal(global.ga.args[0][0], 'send')
+        assert.equal(global.ga.args[0][1], 'exception')
+        assert.equal(global.ga.args[0][2].exDescription,
+            new CustomError('type error', {data: {hoge: 'fuga'}}).stringify())
         assert.equal(global.ga.args[0][2].exFatal, true)
       })
     })

@@ -13,7 +13,7 @@ gulp.task 'build', ->
   webpack = require('webpack-stream')
   uglify  = require('gulp-uglify')
   rename  = require('gulp-rename')
-  webpack_config.entry = 'src/action-tracker'
+  webpack_config.entry = 'action-tracker'
   gulp.src('src')
     .pipe webpack(webpack_config)
     .pipe gulp.dest('dist/')
