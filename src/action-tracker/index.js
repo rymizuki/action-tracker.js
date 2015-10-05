@@ -16,6 +16,7 @@ var methods = [
   'send',
   'pageview',
   'emit',
+  'exception',
 ];
 
 for (let index=0; index<methods.length; index++) {

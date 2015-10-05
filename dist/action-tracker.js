@@ -77,7 +77,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return __cached || (__cached = tracker());
 	}
 
-	var methods = ['set', 'send', 'pageview', 'emit'];
+	var methods = ['set', 'send', 'pageview', 'emit', 'exception'];
 
 	var _loop = function (index) {
 	  var methodName = methods[index];
@@ -208,6 +208,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	        eventAction: eventAction,
 	        eventLabel: eventLabel,
 	        eventValue: eventValue
+	      });
+	    }
+	  }, {
+	    key: 'exception',
+	    value: function exception(message) {
+	      var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+
+	      return this.send('exception', {
+	        exDescription: message,
+	        exFatal: options.fatal || false
 	      });
 	    }
 	  }]);

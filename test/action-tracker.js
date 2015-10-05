@@ -109,3 +109,37 @@ describe('ActionTracker.emit', function () {
     })
   })
 })
+
+describe('ActionTracker.exception', function () {
+  var stub;
+  beforeEach(function () {
+    stub = sinon.stub(ActionTracker.Tracker.prototype, 'exception')
+  })
+  afterEach(function () {
+    stub.restore();
+  })
+  describe('.exception(error)', function () {
+    it('should be called tracker.exception(error)', function () {
+      ActionTracker.exception('type error')
+      assert.ok(stub.calledOnce)
+      assert.equal(stub.args[0][0], 'type error')
+      assert.equal(stub.args[0][1], null)
+    })
+  })
+  describe('.exception(error, {fatal: false})', function () {
+    it('should be called tracker.exception(error, {fatal: false})', function () {
+      ActionTracker.exception('type error', {fatal: false})
+      assert.ok(stub.calledOnce)
+      assert.equal(stub.args[0][0], 'type error')
+      assert.equal(stub.args[0][1].fatal, false)
+    })
+  })
+  describe('.exception(error, {fatal: true)', function () {
+    it('should be called tracker.exception(error, {fatal: true})', function () {
+      ActionTracker.exception('type error', {fatal: true})
+      assert.ok(stub.calledOnce)
+      assert.equal(stub.args[0][0], 'type error')
+      assert.equal(stub.args[0][1].fatal, true)
+    })
+  })
+})
