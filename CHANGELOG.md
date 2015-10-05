@@ -1,3 +1,19 @@
+<a name="1.1.0-0"></a>
+# 1.1.0-0 (2015-10-05)
+
+
+### docs
+
+* docs(tracker.exception): add tracker's documentation ([fdc368f](https://github.com/rymizuki/action-tracker.js/commit/fdc368f))
+
+### feat
+
+* feat(action-tracker): add new featuer tracker.exception ([7546886](https://github.com/rymizuki/action-tracker.js/commit/7546886))
+
+* Merge pull request #3 from rymizuki/throw_exception_to_ga ([663af82](https://github.com/rymizuki/action-tracker.js/commit/663af82))
+
+
+
 <a name="1.0.2"></a>
 ## 1.0.2 (2015-09-29)
 
