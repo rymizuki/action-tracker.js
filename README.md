@@ -77,6 +77,13 @@ Send event.
 - label    [optional] ... Event label. By default, set a `''`.
 - value    [optional] ... Event value. By default, set a `null`.
 
+### tracker.exception(error_message, options)
+
+Send the exception.
+
+- error_message [required] ... description of the exception.
+- options.fatal [optional] ... GA's `exFatal` flag. By default, set a `false`.
+
 ## LICENSE
 
 MIT
