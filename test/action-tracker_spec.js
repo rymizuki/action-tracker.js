@@ -1,3 +1,5 @@
+import ActionTracker from 'action-tracker'
+
 describe('expose', function () {
   describe('window', function () {
     it('should be has property `ActionTracker`', function () {
