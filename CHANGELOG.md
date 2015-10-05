@@ -1,3 +1,24 @@
+<a name="1.1.0-1"></a>
+# 1.1.0-1 (2015-10-05)
+
+
+* Merge pull request #4 from rymizuki/ensure_error_object_in_exception ([9ed0cc6](https://github.com/rymizuki/action-tracker.js/commit/9ed0cc6))
+
+### chore
+
+* chore: update dependencies ([f96d8bd](https://github.com/rymizuki/action-tracker.js/commit/f96d8bd))
+* chore(test): use karma-webpack ([5b5d41e](https://github.com/rymizuki/action-tracker.js/commit/5b5d41e))
+
+### docs
+
+* docs(exception): update description in exception ([837e863](https://github.com/rymizuki/action-tracker.js/commit/837e863))
+
+### feat
+
+* feat(tracker.exception): to pass each erro object. ([45d8348](https://github.com/rymizuki/action-tracker.js/commit/45d8348))
+
+
+
 <a name="1.1.0-0"></a>
 # 1.1.0-0 (2015-10-05)
 
