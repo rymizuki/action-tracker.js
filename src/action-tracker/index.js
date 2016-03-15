@@ -1,10 +1,12 @@
-import Tracker from './tracker';
+import Tracker        from './tracker';
+import * as providers from './providers';
 
-function tracker (options) {
+function tracker (options = {}) {
   return new Tracker(options);
 }
 
-tracker.Tracker = Tracker;
+tracker.Tracker  = Tracker;
+tracker.Provider = providers
 
 var __cached = null;
 function __getTracker () {
