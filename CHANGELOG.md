@@ -1,3 +1,13 @@
+<a name="1.2.0"></a>
+# 1.2.0 (2016-03-15)
+
+
+### feat
+
+* feat(provider): support that are not google-analytics provider. ([5a1ad96](https://github.com/rymizuki/action-tracker.js/commit/5a1ad96))
+
+
+
 <a name="1.1.0"></a>
 # 1.1.0 (2015-10-05)
 
