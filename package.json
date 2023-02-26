@@ -1,6 +1,6 @@
 {
   "name": "action-tracker",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "The easy-to-use library for Google Analytics's tracking.",
   "main": "dist/action-tracker.js",
   "scripts": {
